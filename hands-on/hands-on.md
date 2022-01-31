@@ -2,8 +2,6 @@
 
 Ce petit exemple de mise en pratique permettra de lister et d'utiliser les commandes git les plus courantes.
 
-
-
 ## Prérequis
 
 L'objectif étant de pratiquer l'utilisation de git, on supposera que les étapes suivantes sont des acquis : 
@@ -14,8 +12,6 @@ L'objectif étant de pratiquer l'utilisation de git, on supposera que les étape
 
 - Avoir les autorisations pour pusher vers un repository GitHub (autrement dit, le PC connaît vos identifiants).
 
-
-
 ## Situation
 
 Vous venez de rejoindre une équipe de data science dans une entreprise qui travaille sur la conduite autonome. Ils ont développé une application tout-en-un intégrant des modèles de machine learning qui tourneront à bord de leurs véhicules.
@@ -23,8 +19,6 @@ Vous venez de rejoindre une équipe de data science dans une entreprise qui trav
 A l'heure actuelle, leur base de code, contenue dans le dossier `mock-project` , comporte une seule feature fonctionnelle `movement detection`. Le package `core` contient du code qui peut servir à toutes les features.
 
 L'objectif de votre session de travail est d'ajouter une toute nouvelle feature `sign detection`, et de la proposer à vos (fictifs) collègues pour relire votre code.
-
-
 
 Le *git flow* en vigueur dans l'équipe est le suivant :
 
@@ -47,13 +41,9 @@ Le *git flow* en vigueur dans l'équipe est le suivant :
 
 - Lorsque la branche de feature est "propre", une pull request doit être faite vers `project-develop`.
 
-
-
 ## Mise en place du projet
 
 Afin de pouvoir travailler sur le projet, il faut le récupérer sur GitHub [à l'addresse du présent repository](https://github.com/SnowHawkeye/git-basics).
-
-
 
 ### Créer un fork du projet
 
@@ -62,8 +52,6 @@ En entreprise, vous auriez été ajouté en tant que collaborateur du projet. Ic
 Pour contourner ce problème, il suffit de créer un **fork** du projet, c'est-à-dire un miroir du repository qui vous sera propre. Pour cela, il suffit d'appuyer sur le bouton "Fork" en haut à droite de la page.
 
 Naviguez maintenant vers votre version du repository : vous aurez maintenant tous les accès nécessaires.
-
-
 
 ### Cloner le repository en local
 
@@ -85,8 +73,6 @@ git clone $REPOSITORY_URL
 
 Vous avez maintenant le dossier du repository dans vos fichiers locaux. N'oubliez pas d'y naviguer en ligne de commande avec `cd`.
 
-
-
 ## Travail sur le projet
 
 ### Vérifier les branches
@@ -106,8 +92,6 @@ Vous verrez alors listées les branches que vous avez sur votre machine, en part
 ```git
 git fetch
 ```
-
-
 
 ### Manipuler les branches
 
@@ -172,8 +156,6 @@ Quelques notes sur les commandes ci-dessus :
 
 - Vous remarquerez que la nouvelle branche créée respecte les conventions de nommage de l'équipe !
 
-
-
 ### Création d'une nouvelle feature
 
 #### Ajout de modifications
@@ -191,8 +173,6 @@ Fort de ce travail préliminaire, vous êtes maintenant prêt à créer une nouv
 > Tous ces "faux changements" n'ont d'objectif que de montrer les différents types de changement qui peuvent apparaître dans un commit. Certains d'entre eux seront utilisés pour illustrer d'autres points par la suite.
 
 Si vous utilisez `git status`, vous devriez voir tous les changements que vous avez faits : le nouveau dossier, le fichier modifié, le fichier déplacé, et le nouveau fichier.
-
-
 
 #### Les fichiers à ignorer
 
@@ -217,8 +197,6 @@ Il vous suffit de l'ouvrir et d'y ajouter une ligne avec le nom du fichier. Les 
 Si vous enregistrez le `.gitignore` et que vous utilisez à nouveau `git status`, vous devriez voir que le fichier "généré" n'est plus considéré comme ayant reçu des changements. En revanche, le `.gitignore` a maintenant été modifié.
 
 > Le `.gitignore` étant un fichier "commun", il est déconseillé de le modifier unilatéralement comme nous venons de le faire (pour éviter les conflits). Dans la réalité, on préfère utiliser des `.gitignore` pré-faits. Voir par exemple [ce lien](https://www.toptal.com/developers/gitignore)).
-
-
 
 #### Committer ses changements
 
@@ -252,8 +230,6 @@ Dans le code ci-dessus :
 
 - Le message de commit ne respecte pas encore les conventions de l'équipe, mais vous aurez l'occasion de le changer par la suite quand vous squasherez les commits !
 
-
-
 #### Uploader ses changements
 
 Vous avez committé vos changements **localement**, il est maintenant temps de les uploader vers le repository en remote. Il est important de noter qu'une fois que les changements sont en ligne, les modifications telles que renommer une branche ou réécrire son l'historique deviennent dangereuses.
@@ -271,6 +247,30 @@ git push --set-upstream origin project-feature/sign-detection
 ```
 
 > `origin` désigne ici la remote, c'est-à-dire le repository vers lequel on pushe. Nous ne détaillerons pas ici le travail avec plusieurs remotes, mais cela ne change pas vraiment les commandes : il faut juste faire attention lorsqu'on push ou pull à choisir la bonne remote.
+
+Maintenant que les changements sont en ligne, vous pouvez aller sur la page web de votre projet GitHub, et créer une pull request.
+
+- Si votre push est récent, un bouton se présentera directement.
+
+- Sinon, vous pouvez cliquer sur "branches", trouver votre branche dans la liste et cliquer sur "New pull request".
+
+![](figures/fig-pr-location.png)
+
+
+
+Lorsque la PR est ouverte, portez attention à :
+
+- La branche vers laquelle vous voulez merger (pour nous, ce serait `project-develop`).
+
+- Le titre et commentaire de votre PR : c'est par eux que vous communiquez avec votre équipe ce que fait votre PR - soignez-les !
+
+- La liste des commits de la PR (vous devriez en voir 2 pour l'instant) et de vos changements. C'est une bonne façon de vérifier que vous faites une PR vers la bonne branche, et que vous avez committé ce que vous vouliez committer.
+
+Lorsque vous êtes certain que tout est au propre, vous pouvez appuyer sur "Create pull request".
+
+
+
+![](figures/fig-pr.png)
 
 
 
